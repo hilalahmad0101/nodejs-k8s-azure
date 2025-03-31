@@ -28,6 +28,8 @@ pipeline {
                 withCredentials([file(credentialsId: 'k8s-credentials', variable: 'KUBECONFIG')]) {
                     sh 'kubectl apply -f k8s/deployment.yml'
                     sh 'kubectl apply -f k8s/service.yml'
+                    sh 'kubectl rollout restart deployment nodejs-app'
+                    sh 'kubectl rollout status deployment nodejs-app'
                     sh 'kubectl get pods'
                 }
             }
