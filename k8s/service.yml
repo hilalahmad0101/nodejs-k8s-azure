@@ -1,10 +1,8 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: nodejs-service
-  namespace: nodejs-namespace
 spec:
-  replicas: 3
   selector:
     app: nodejs-app
   ports:
