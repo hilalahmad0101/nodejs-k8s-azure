@@ -23,6 +23,14 @@ app.get('/another',(req,res)=>{
 });
 
 
+app.get('/another-api',(req,res)=>{
+    res.status(200).json({
+        'success':true,
+        'message':'This is running another api'
+    });
+});
+
+
 app.listen(3000,()=>{
     console.log('Server is running on port 3000');
 });
