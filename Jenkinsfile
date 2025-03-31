@@ -35,4 +35,22 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            emailext(
+                subject: "✅ Jenkins Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "The Jenkins build has completed successfully.\n\nView details: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
+                to: 'hilal@archiwiz.com'
+            )
+        }
+        failure {
+            emailext(
+                subject: "❌ Jenkins Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "The Jenkins build has FAILED.\n\nCheck logs: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
+                to: 'hilal@archiwiz.com'
+            )
+        }
+    }
 }
